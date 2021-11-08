@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddRestActivity">
+
+    <EditText
+        android:id="@+id/etNameAddRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="11dp"
+        android:ems="10"
+        android:hint="restaurant name..."
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/etDescriptionAddRest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etDescriptionAddRest"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="9dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="restaurant description..."
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/etAddressAddRest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNameAddRest" />
+
+    <EditText
+        android:id="@+id/etAddressAddRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:hint="address..."
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/spRestCatAddRest"
+        app:layout_constraintEnd_toEndOf="@+id/spRestCatAddRest"
+        app:layout_constraintTop_toBottomOf="@+id/etDescriptionAddRest" />
+
+    <Spinner
+        android:id="@+id/spRestCatAddRest"
+        android:layout_width="210dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/etPhoneAddRest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etAddressAddRest"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/etPhoneAddRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="phone..."
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/ivPhotoAddRest"
+        app:layout_constraintStart_toStartOf="@+id/spRestCatAddRest"
+        app:layout_constraintTop_toBottomOf="@+id/spRestCatAddRest" />
+
+    <ImageView
+        android:id="@+id/ivPhotoAddRest"
+        android:layout_width="70dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="61dp"
+        android:onClick="selectPhoto"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddAddRest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneAddRest"
+        tools:srcCompat="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/btnAddAddRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="117dp"
+        android:onClick="add"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPhotoAddRest" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

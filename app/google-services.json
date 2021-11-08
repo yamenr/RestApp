@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "372719694002",
+    "project_id": "restapp-e9272",
+    "storage_bucket": "restapp-e9272.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372719694002:android:21ef16be2a614d102599ab",
+        "android_client_info": {
+          "package_name": "com.yamen.restapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372719694002-hugdaipu4iohiqno7uqh1hgadms4niav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxBoFI50ozy9KXOb1TfAjeIKZOpsqRRh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372719694002-hugdaipu4iohiqno7uqh1hgadms4niav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
