@@ -73,4 +73,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, AddRestActivity.class);
         startActivity(i);
     }
+
+    public void gotoAllRests(View view) {
+        Intent i = new Intent(this, AllRestActivity.class);
+        startActivity(i);
+    }
 }

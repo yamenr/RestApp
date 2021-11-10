@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -101,6 +103,8 @@ public class AddRestActivity extends AppCompatActivity {
                 if (data != null) {
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                        ivPhoto.setBackground(null);
+                        ivPhoto.setImageBitmap(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
