@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, R.string.successfully_logged_in, Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(MainActivity.this, AllRestActivity.class);
+                            startActivity(i);
 
                         } else {
                             // TODO: what to do if fails
