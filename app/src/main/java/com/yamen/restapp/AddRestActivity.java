@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -21,9 +23,13 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 public class AddRestActivity extends AppCompatActivity {
 
@@ -32,6 +38,8 @@ public class AddRestActivity extends AppCompatActivity {
     private Spinner spCat;
     private ImageView ivPhoto;
     private FirebaseServices fbs;
+    private Uri filePath;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,7 @@ public class AddRestActivity extends AppCompatActivity {
         ivPhoto = findViewById(R.id.ivPhotoAddRest);
         fbs = FirebaseServices.getInstance();
         spCat.setAdapter(new ArrayAdapter<RestCat>(this, android.R.layout.simple_list_item_1, RestCat.values()));
+        storageReference = fbs.getStorage().getReference();
     }
 
     public void add(View view) {
@@ -63,7 +72,7 @@ public class AddRestActivity extends AppCompatActivity {
         category = spCat.getSelectedItem().toString();
         if (ivPhoto.getDrawable() == null)
             photo = "no_image";
-        else photo = ivPhoto.getDrawable().toString();
+        else photo = storageReference.toString();
 
         if (name.trim().isEmpty() || description.trim().isEmpty() || address.trim().isEmpty() ||
             phone.trim().isEmpty() || category.trim().isEmpty() || photo.trim().isEmpty())
@@ -102,9 +111,11 @@ public class AddRestActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
                     try {
+                        filePath = data.getData();
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                         ivPhoto.setBackground(null);
                         ivPhoto.setImageBitmap(bitmap);
+                        uploadImage();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -112,6 +123,80 @@ public class AddRestActivity extends AppCompatActivity {
             } else if (resultCode == Activity.RESULT_CANCELED)  {
                 Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private void uploadImage()
+    {
+        if (filePath != null) {
+
+            // Code for showing progressDialog while uploading
+            ProgressDialog progressDialog
+                    = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            // Defining the child of storageReference
+            StorageReference ref
+                    = storageReference
+                    .child(
+                            "images/"
+                                    + UUID.randomUUID().toString());
+
+            // adding listeners on upload
+            // or failure of image
+            ref.putFile(filePath)
+                    .addOnSuccessListener(
+                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                                @Override
+                                public void onSuccess(
+                                        UploadTask.TaskSnapshot taskSnapshot)
+                                {
+
+                                    // Image uploaded successfully
+                                    // Dismiss dialog
+                                    progressDialog.dismiss();
+                                    Toast
+                                            .makeText(AddRestActivity.this,
+                                                    "Image Uploaded!!",
+                                                    Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            })
+
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e)
+                        {
+
+                            // Error, Image not uploaded
+                            progressDialog.dismiss();
+                            Toast
+                                    .makeText(AddRestActivity.this,
+                                            "Failed " + e.getMessage(),
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    })
+                    .addOnProgressListener(
+                            new OnProgressListener<UploadTask.TaskSnapshot>() {
+
+                                // Progress Listener for loading
+                                // percentage on the dialog box
+                                @Override
+                                public void onProgress(
+                                        UploadTask.TaskSnapshot taskSnapshot)
+                                {
+                                    double progress
+                                            = (100.0
+                                            * taskSnapshot.getBytesTransferred()
+                                            / taskSnapshot.getTotalByteCount());
+                                    progressDialog.setMessage(
+                                            "Uploaded "
+                                                    + (int)progress + "%");
+                                }
+                            });
         }
     }
 }
