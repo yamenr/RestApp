@@ -16,7 +16,7 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
 
     private List<Restaurant> mData;
     private LayoutInflater mInflater;
-    private MyRecyclerViewAdapter.ItemClickListener mClickListener;
+    private AdapterRestaurant.ItemClickListener mClickListener;
 
     // data is passed into the constructor
     AdapterRestaurant(Context context, List<Restaurant> data) {
@@ -70,7 +70,7 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
     }
 
     // allows clicks events to be caught
-    void setClickListener(MyRecyclerViewAdapter.ItemClickListener itemClickListener) {
+    void setClickListener(AdapterRestaurant.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
