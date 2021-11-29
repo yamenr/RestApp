@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.ViewHolder> {
