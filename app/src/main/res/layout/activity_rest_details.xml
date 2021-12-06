@@ -6,4 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".RestDetailsActivity">
 
+    <TextView
+        android:id="@+id/tvNameRestDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="name..."
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="65dp" />
+
+    <TextView
+        android:id="@+id/tvDescriptionRestDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description..."
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="122dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="address..."
+        tools:layout_editor_absoluteX="174dp"
+        tools:layout_editor_absoluteY="187dp" />
+
+    <TextView
+        android:id="@+id/tvCategoryRestDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="category..."
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="251dp" />
+
+    <ImageView
+        android:id="@+id/ivPhotoRestDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="311dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvPhoneRestDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="phone..."
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="480dp" />
+
+    <Button
+        android:id="@+id/btnSMSRestDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMS"
+        tools:layout_editor_absoluteX="304dp"
+        tools:layout_editor_absoluteY="164dp" />
+
+    <Button
+        android:id="@+id/btnWhatsappRestDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Whatsapp"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="222dp" />
+
+    <Button
+        android:id="@+id/btnCallRestDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call"
+        tools:layout_editor_absoluteX="301dp"
+        tools:layout_editor_absoluteY="288dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
