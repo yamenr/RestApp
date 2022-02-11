@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,19 +41,26 @@ public class AllRestActivity extends AppCompatActivity {
     }
 
     private void readData() {
-        fbs.getFire().collection("restaurants")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                rests.add(document.toObject(Restaurant.class));
+        try {
+
+            fbs.getFire().collection("restaurants")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    rests.add(document.toObject(Restaurant.class));
+                                }
+                            } else {
+                                Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
                             }
-                        } else {
-                            Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
                         }
-                    }
-                });
+                    });
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(), "error reading!" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
