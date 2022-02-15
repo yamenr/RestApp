@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (username.trim().isEmpty() || password.trim().isEmpty())
         {
-            Toast.makeText(this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.err_fields_empty, Toast.LENGTH_SHORT).show();
             return;
         }
 
