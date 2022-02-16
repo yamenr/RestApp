@@ -33,10 +33,10 @@ public class RestDetailsActivity extends AppCompatActivity {
         Restaurant rest = (Restaurant) i.getSerializableExtra("rest");
 
         tvName.setText(rest.getName());
-        tvDescription.setText(rest.getName());
-        tvAddress.setText(rest.getName());
-        tvCategory.setText(rest.getName());
-        tvPhone.setText(rest.getName());
+        tvDescription.setText(rest.getDescription());
+        tvAddress.setText(rest.getAddress());
+        tvCategory.setText(rest.getCategory().toString());
+        tvPhone.setText(rest.getPhone());
         Picasso.get().load(rest.getPhoto()).into(ivPhoto);
     }
 

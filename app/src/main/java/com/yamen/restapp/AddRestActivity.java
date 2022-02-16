@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -110,15 +111,16 @@ public class AddRestActivity extends AppCompatActivity {
         if (requestCode == 40) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
-                    try {
+//                    try {
                         filePath = data.getData();
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-                        ivPhoto.setBackground(null);
-                        ivPhoto.setImageBitmap(bitmap);
+//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+//                        ivPhoto.setBackground(null);
+//                        ivPhoto.setImageBitmap(bitmap);
+                        Picasso.get().load(filePath).into(ivPhoto);
                         uploadImage();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED)  {
                 Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
