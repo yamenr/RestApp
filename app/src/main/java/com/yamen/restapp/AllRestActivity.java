@@ -16,6 +16,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllRestActivity extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class AllRestActivity extends AppCompatActivity {
     AdapterRestaurant adapter;
     FirebaseServices fbs;
     ArrayList<Restaurant> rests;
+    MyCallback myCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +34,23 @@ public class AllRestActivity extends AppCompatActivity {
         fbs = FirebaseServices.getInstance();
         rests = new ArrayList<Restaurant>();
         readData();
+        myCallback = new MyCallback() {
+            @Override
+            public void onCallback(List<Restaurant> restsList) {
+                RecyclerView recyclerView = findViewById(R.id.rvRestsAllRest);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                adapter = new AdapterRestaurant(getApplicationContext(), rests);
+                recyclerView.setAdapter(adapter);
+            }
+        };
+
 
         // set up the RecyclerView
+        /*
         RecyclerView recyclerView = findViewById(R.id.rvRestsAllRest);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdapterRestaurant(this, rests);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);*/
     }
 
     private void readData() {
@@ -52,6 +65,8 @@ public class AllRestActivity extends AppCompatActivity {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     rests.add(document.toObject(Restaurant.class));
                                 }
+
+                                myCallback.onCallback(rests);
                             } else {
                                 Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
                             }

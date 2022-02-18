@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
             // upload restaurant data
             // goto details activity
             Intent i = new Intent(context, RestDetailsActivity.class);
-            i.putExtra("rest", (Serializable)rest);
+            i.putExtra("rest", rest);
             context.startActivity(i);
         }
     };
@@ -45,7 +47,7 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
     // inflates the row layout from xml when needed
     @Override
     public AdapterRestaurant.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.row, parent, false);
+        View view = mInflater.inflate(R.layout.row_rest, parent, false);
         return new AdapterRestaurant.ViewHolder(view);
     }
 
@@ -54,7 +56,7 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
     public void onBindViewHolder(AdapterRestaurant.ViewHolder holder, int position) {
         Restaurant rest = mData.get(position);
         holder.tvName.setText(rest.getName());
-        //holder.ivPhoto.setImageDrawable(rest.getPhoto());
+        Picasso.get().load(rest.getPhoto()).into(holder.ivPhoto);
     }
 
     // total number of rows
@@ -64,7 +66,7 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
     }
 
 
-    // stores and recycles views as they are scrolled off screen
+    // stores and recycles views as they are scrol    led off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvName;
         ImageView ivPhoto;
