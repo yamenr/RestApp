@@ -3,6 +3,7 @@ package com.yamen.restapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -56,8 +57,8 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(SignupActivity.this, R.string.successfully_registered, Toast.LENGTH_SHORT).show();
-
+                            Intent i = new Intent(SignupActivity.this, AllRestActivity.class);
+                            startActivity(i);
                         } else {
                             // TODO: what to do if fails
                         }
