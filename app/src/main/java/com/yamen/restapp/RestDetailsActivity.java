@@ -1,15 +1,11 @@
 package com.yamen.restapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
-import java.io.Serializable;
 
 public class RestDetailsActivity extends AppCompatActivity {
 

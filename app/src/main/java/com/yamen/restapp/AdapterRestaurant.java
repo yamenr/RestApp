@@ -2,20 +2,14 @@ package com.yamen.restapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.squareup.picasso.Picasso;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.ViewHolder> {
@@ -27,12 +21,10 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
     private final AdapterRestaurant.ItemClickListener mClickListener = new ItemClickListener() {
         @Override
         public void onItemClick(View view, int position) {
-            // get restaurant data
             Restaurant rest = mData.get(position);
-            // upload restaurant data
-            // goto details activity
             Intent i = new Intent(context, RestDetailsActivity.class);
             i.putExtra("rest", rest);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
         }
     };

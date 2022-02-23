@@ -6,12 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,9 +22,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public class AddRestActivity extends AppCompatActivity {
@@ -40,7 +32,8 @@ public class AddRestActivity extends AppCompatActivity {
     private ImageView ivPhoto;
     private FirebaseServices fbs;
     private Uri filePath;
-    StorageReference storageReference;
+    private StorageReference storageReference;
+    private String refAfterSuccessfullUpload = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +66,7 @@ public class AddRestActivity extends AppCompatActivity {
         category = spCat.getSelectedItem().toString();
         if (ivPhoto.getDrawable() == null)
             photo = "no_image";
-        else photo = storageReference.getDownloadUrl().toString();
+        else photo = storageReference.toString();
 
         if (name.trim().isEmpty() || description.trim().isEmpty() || address.trim().isEmpty() ||
             phone.trim().isEmpty() || category.trim().isEmpty() || photo.trim().isEmpty())
@@ -111,16 +104,10 @@ public class AddRestActivity extends AppCompatActivity {
         if (requestCode == 40) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
-//                    try {
                         filePath = data.getData();
-//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-//                        ivPhoto.setBackground(null);
-//                        ivPhoto.setImageBitmap(bitmap);
+                        ivPhoto.setBackground(null);
                         Picasso.get().load(filePath).into(ivPhoto);
                         uploadImage();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED)  {
                 Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
@@ -164,6 +151,7 @@ public class AddRestActivity extends AppCompatActivity {
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
+                                    refAfterSuccessfullUpload = ref.toString();
                                 }
                             })
 

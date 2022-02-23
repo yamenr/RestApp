@@ -5,4 +5,6 @@
     <string name="successfully_logged_in">You have successfully logged in!</string>
     <string
         name="err_firebase_general">Genera Error firebase!</string>
+    <string
+        name="err_incorrect_user_password">Incorrect username or password!</string>
 </resources>
