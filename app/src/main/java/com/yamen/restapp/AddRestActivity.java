@@ -126,12 +126,14 @@ public class AddRestActivity extends AppCompatActivity {
             progressDialog.show();
 
             // Defining the child of storageReference
+            String fileNameStr = filePath.toString().substring(filePath.toString().lastIndexOf("/")+1);
             StorageReference ref
                     = storageReference
                     .child(
                             "images/"
-                                    + UUID.randomUUID().toString());
+                                     + fileNameStr);
 
+            filePath.toString().substring(filePath.toString().lastIndexOf("/")+1);
             // adding listeners on upload
             // or failure of image
             ref.putFile(filePath)
