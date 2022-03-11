@@ -57,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
                             Intent i = new Intent(SignupActivity.this, AllRestActivity.class);
                             startActivity(i);
                         } else {
-                            // TODO: what to do if fails
+                            Toast.makeText(SignupActivity.this, R.string.err_firebase_general, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

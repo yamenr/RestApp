@@ -34,6 +34,7 @@ public class AddRestActivity extends AppCompatActivity {
     private Uri filePath;
     private StorageReference storageReference;
     private String refAfterSuccessfullUpload = null;
+    private String downloadableURL = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class AddRestActivity extends AppCompatActivity {
         category = spCat.getSelectedItem().toString();
         if (ivPhoto.getDrawable() == null)
             photo = "no_image";
-        else photo = storageReference.toString();
+        else photo = downloadableURL;//storageReference.toString();
 
         if (name.trim().isEmpty() || description.trim().isEmpty() || address.trim().isEmpty() ||
             phone.trim().isEmpty() || category.trim().isEmpty() || photo.trim().isEmpty())
@@ -133,7 +134,8 @@ public class AddRestActivity extends AppCompatActivity {
                             "images/"
                                      + fileNameStr);
 
-            filePath.toString().substring(filePath.toString().lastIndexOf("/")+1);
+            downloadableURL = ref.getDownloadUrl().toString();
+            //filePath.toString().substring(filePath.toString().lastIndexOf("/")+1);
             // adding listeners on upload
             // or failure of image
             ref.putFile(filePath)
