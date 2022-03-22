@@ -132,16 +132,16 @@ public class AddRestActivity extends AppCompatActivity {
                     = storageReference
                     .child(
                             "images/"
-                                     + fileNameStr);
+                                + filePath.getLastPathSegment());
+                                     //+ fileNameStr);
 
-            downloadableURL = ref.getDownloadUrl().toString();
+            //downloadableURL = ref.getDownloadUrl().toString();
             //filePath.toString().substring(filePath.toString().lastIndexOf("/")+1);
             // adding listeners on upload
             // or failure of image
             ref.putFile(filePath)
                     .addOnSuccessListener(
                             new OnSuccessListener<UploadTask.TaskSnapshot>() {
-
                                 @Override
                                 public void onSuccess(
                                         UploadTask.TaskSnapshot taskSnapshot)
