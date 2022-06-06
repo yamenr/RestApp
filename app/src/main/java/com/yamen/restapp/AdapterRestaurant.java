@@ -24,7 +24,7 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
             Restaurant rest = mData.get(position);
             Intent i = new Intent(context, RestDetailsActivity.class);
             i.putExtra("rest", rest);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
             context.startActivity(i);
         }
     };

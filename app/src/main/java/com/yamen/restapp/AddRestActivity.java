@@ -66,7 +66,7 @@ public class AddRestActivity extends AppCompatActivity {
         category = spCat.getSelectedItem().toString();
         if (ivPhoto.getDrawable() == null)
             photo = "no_image";
-        else photo = refAfterSuccessfullUpload;
+        else photo = storageReference.toString();
 
         if (name.trim().isEmpty() || description.trim().isEmpty() || address.trim().isEmpty() ||
             phone.trim().isEmpty() || category.trim().isEmpty() || photo.trim().isEmpty())
