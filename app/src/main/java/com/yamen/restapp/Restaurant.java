@@ -1,6 +1,7 @@
 package com.yamen.restapp;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class Restaurant implements Serializable {
     private String name;

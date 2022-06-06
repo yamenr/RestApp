@@ -10,6 +10,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,5 +81,21 @@ public class MainActivity extends AppCompatActivity {
     public void gotoAllRests(View view) {
         Intent i = new Intent(this, AllRestActivity.class);
         startActivity(i);
+    }
+
+    public boolean deleteRests()
+    {
+        DocumentReference docRef = fbs.getFire().collection("restaurants").document("BJ");
+
+        // Remove the 'capital' field from the document
+        Map<String,Object> updates = new HashMap<>();
+        updates.put("capital", FieldValue.delete());
+
+        docRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            // [START_EXCLUDE]
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {}
+            // [START_EXCLUDE]
+        });
     }
 }

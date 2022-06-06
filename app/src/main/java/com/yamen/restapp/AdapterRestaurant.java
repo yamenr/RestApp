@@ -57,7 +57,6 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
         return mData.size();
     }
 
-
     // stores and recycles views as they are scrol    led off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvName;
@@ -80,12 +79,6 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
     Restaurant getItem(int id) {
         return mData.get(id);
     }
-
-    // allows clicks events to be caught
-    /*
-    void setClickListener(AdapterRestaurant.ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }*/
 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {

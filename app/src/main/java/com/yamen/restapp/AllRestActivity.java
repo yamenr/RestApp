@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AllRestActivity extends AppCompatActivity {
@@ -68,6 +69,9 @@ public class AllRestActivity extends AppCompatActivity {
                             }
                         }
                     });
+
+            // TODO: Added sorting
+            Collections.sort(rests, new RestaurantComparator());
         }
         catch (Exception e)
         {
