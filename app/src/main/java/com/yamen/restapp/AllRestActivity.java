@@ -1,11 +1,15 @@
 package com.yamen.restapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,13 +45,42 @@ public class AllRestActivity extends AppCompatActivity {
             }
         };
 
+        ActionBar actionBar = getSupportActionBar();
 
-        // set up the RecyclerView
-        /*
-        RecyclerView recyclerView = findViewById(R.id.rvRestsAllRest);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AdapterRestaurant(this, rests);
-        recyclerView.setAdapter(adapter);*/
+        actionBar.setTitle("  RestApp");
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            //case R.id.miSearch:
+            // User chose the "Settings" item, show the app settings UI...
+            //return true;
+
+            case R.id.miProfile:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                return true;
+
+            case R.id.miSettings:
+
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     private void readData() {

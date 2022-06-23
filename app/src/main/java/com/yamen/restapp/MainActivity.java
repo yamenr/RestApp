@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    /*
     public boolean deleteRests()
     {
         DocumentReference docRef = fbs.getFire().collection("restaurants").document("BJ");
@@ -97,5 +98,5 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {}
             // [START_EXCLUDE]
         });
-    }
+    }*/
 }

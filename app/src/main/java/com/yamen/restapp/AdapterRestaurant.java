@@ -1,14 +1,23 @@
 package com.yamen.restapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
@@ -17,6 +26,7 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
     private List<Restaurant> mData;
     private LayoutInflater mInflater;
     private Context context;
+    private FirebaseServices fbs;
 
     private final AdapterRestaurant.ItemClickListener mClickListener = new ItemClickListener() {
         @Override
@@ -34,6 +44,7 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.context = context;
+        this.fbs = FirebaseServices.getInstance();
     }
 
     // inflates the row layout from xml when needed
@@ -48,7 +59,18 @@ public class AdapterRestaurant extends RecyclerView.Adapter<AdapterRestaurant.Vi
     public void onBindViewHolder(AdapterRestaurant.ViewHolder holder, int position) {
         Restaurant rest = mData.get(position);
         holder.tvName.setText(rest.getName());
-        Picasso.get().load(rest.getPhoto()).into(holder.ivPhoto);
+        fbs.getStorage().getReference().child(rest.getPhoto()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(rest.getPhoto()).into(holder.ivPhoto);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, e.getMessage());
+            }
+        });
+
     }
 
     // total number of rows
