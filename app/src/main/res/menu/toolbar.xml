@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/miProfile"
-        app:showAsAction="never"
-        android:title="Profile">
 
-    </item>
     <item
-        android:id="@+id/miSettings"
+        android:id="@+id/miSignout"
         app:showAsAction="never"
         android:title="Settings">
     </item>
+    <item
+        android:id="@+id/miAddRest"
+        app:showAsAction="never"
+        android:title="Settings">
+    </item>
+
 </menu>

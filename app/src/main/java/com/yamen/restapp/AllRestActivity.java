@@ -2,9 +2,13 @@ package com.yamen.restapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -62,25 +66,46 @@ public class AllRestActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            //case R.id.miSearch:
-            // User chose the "Settings" item, show the app settings UI...
-            //return true;
 
-            case R.id.miProfile:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
+            case R.id.miAddRest:
+                gotoAddRest();
                 return true;
 
-            case R.id.miSettings:
 
+            case R.id.miSignout:
+                showDialog1();
+                fbs.getAuth().signOut();
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
+
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void showDialog1() {
+        new AlertDialog.Builder(this)
+                .setTitle("Alert!")
+                .setMessage("Are you sure you want to logout!?")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    private void gotoAddRest() {
+        Intent i = new Intent(this, AddRestActivity.class);
+        startActivity(i);
     }
 
     private void readData() {

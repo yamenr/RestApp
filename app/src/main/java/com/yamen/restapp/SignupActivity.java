@@ -13,7 +13,7 @@ import com.google.firebase.auth.AuthResult;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText etUsername,etPassword;
+    private EditText etUsername, etPassword;
     private Utilities utils;
     private FirebaseServices fbs;
 
@@ -34,32 +34,6 @@ public class SignupActivity extends AppCompatActivity {
 
     public void signup(View view) {
 
-        String username = etUsername.getText().toString();
-        String password = etPassword.getText().toString();
-
-        if (username.trim().isEmpty() || password.trim().isEmpty())
-        {
-            Toast.makeText(this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!utils.validateEmail(username) || !utils.validatePassword(password))
-        {
-            Toast.makeText(this, "Incorrect email or password!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        fbs.getAuth().createUserWithEmailAndPassword(username, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Intent i = new Intent(SignupActivity.this, AllRestActivity.class);
-                            startActivity(i);
-                        } else {
-                            Toast.makeText(SignupActivity.this, R.string.err_firebase_general, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
     }
+
 }
